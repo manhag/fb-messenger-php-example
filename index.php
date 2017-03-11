@@ -197,7 +197,18 @@ if (!empty($_REQUEST['hub_mode']) && $_REQUEST['hub_mode'] == 'subscribe' && $_R
                         new MessageButton(MessageButton::TYPE_WEB, "Second link", "http://google.ru")
                     ]);
                 break;
-
+                case 'AccountLink':
+                      $bot->send(new StructuredMessage($message['sender']['id'],
+                        StructuredMessage::TYPE_GENERIC,
+                        [
+                            'elements' => [
+                                new MessageElement("Welcome", "here is our site", "https://site.org/image.png", [
+                                    new MessageButton(MessageButton::TYPE_ACCOUNT_LINK, 'First button','https://www.yoursite.net/authorize.php') 
+                                ]) 
+                            ]
+                        ]
+                    ));
+                    break;
                 case 'delete menu':
                     $bot->deletePersistentMenu();
                 break;
